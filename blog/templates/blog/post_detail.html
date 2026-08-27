@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <h1>{{ post.title }}</h1>
+        <div class="muted">{{ post.created|date:"d.m.Y H:i" }}</div>
+        <div style="margin-top:16px;">{{ post.body|linebreaksbr }}</div>
+
+        {% if post.audio %}
+            <div style="margin-top:16px;">
+                <h2>Аудио</h2>
+                <audio controls style="width:100%;">
+                    <source src="{{ post.audio.url }}">
+                </audio>
+            </div>
+        {% endif %}
+
+        {% if post.video %}
+            <div style="margin-top:16px;">
+                <h2>Видео</h2>
+                <video controls style="width:100%;">
+                    <source src="{{ post.video.url }}">
+                </video>
+            </div>
+        {% endif %}
+
+        {% if post.video_url %}
+            <div style="margin-top:16px;">
+                <h2>Видео</h2>
+                <iframe width="100%" height="400" src="{{ post.video_url }}" frameborder="0" allowfullscreen></iframe>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

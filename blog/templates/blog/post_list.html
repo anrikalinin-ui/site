@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Блог{% endblock %}
+
+{% block content %}
+    <h1 style="margin-bottom:20px;">Блог</h1>
+    {% for post in posts %}
+    <div class="card">
+        <a class="link" href="{% url 'blog:post_detail' post.pk %}" style="text-decoration:none; color:inherit;">
+            <h2 style="margin-bottom:4px;">{{ post.title }}</h2>
+        </a>
+        <div class="muted">{{ post.created|date:"d.m.Y" }}</div>
+        <p style="margin-top:8px;">{{ post.body|truncatewords:40 }}</p>
+        {% if post.audio or post.video or post.video_url %}<div class="muted">🎬 Есть медиа</div>{% endif %}
+    </div>
+    {% empty %}
+    <p>Пока нет постов.</p>
+    {% endfor %}
+{% endblock %}

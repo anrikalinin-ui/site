@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Связаться{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <h1>Связаться со мной</h1>
+        <p class="muted" style="margin-bottom:16px;">Заполни форму — сообщение сохранится у меня.</p>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+{% endblock %}

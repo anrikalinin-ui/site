@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ profile.full_name|default:'Моё резюме' }}{% endblock %}
+
+{% block content %}
+    {% if profile %}
+    <div class="card" style="display:flex; gap:24px; align-items:center;">
+        {% if profile.photo %}
+            <img class="profile-photo" src="{{ profile.photo.url }}" alt="{{ profile.full_name }}">
+        {% endif %}
+        <div>
+            <h1>{{ profile.full_name }}</h1>
+            <div class="muted">{{ profile.title }}</div>
+            <p style="margin-top:10px;">{{ profile.bio|linebreaksbr }}</p>
+            {% if profile.email %}<div>✉️ {{ profile.email }}</div>{% endif %}
+            {% if profile.phone %}<div>📞 {{ profile.phone }}</div>{% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if skills %}
+    <div class="card">
+        <h2>Навыки</h2>
+        <div class="grid">
+            {% for s in skills %}
+            <div>
+                {{ s.name }}
+                <div class="bar"><div style="width: {{ s.level|default:1 }}0%;"></div></div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if experiences %}
+    <div class="card">
+        <h2>Опыт работы</h2>
+        {% for e in experiences %}
+        <div style="margin-bottom:16px;">
+            <strong>{{ e.position }}</strong> — {{ e.company }}
+            <div class="muted">{{ e.start_date|date:"m.Y" }} — {{ e.end_date|date:"m.Y"|default:"наст. время" }}</div>
+            <p>{{ e.description|linebreaksbr }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if projects %}
+    <div class="card">
+        <h2>Проекты</h2>
+        <div class="grid">
+            {% for p in projects %}
+            <div style="border:1px solid #eee; border-radius:8px; padding:16px;">
+                {% if p.image %}<img class="project-img" src="{{ p.image.url }}" alt="{{ p.title }}">{% endif %}
+                <strong>{{ p.title }}</strong>
+                <p class="muted">{{ p.description|truncatewords:30 }}</p>
+                {% if p.technologies %}<div class="muted" style="font-size:.9rem;">🛠 {{ p.technologies }}</div>{% endif %}
+                {% if p.url %}<a class="link" href="{{ p.url }}" target="_blank">Открыть →</a>{% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

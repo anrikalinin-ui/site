@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} — Моё резюме</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: #1a1a2e;
+            background: #f5f6fa;
+            line-height: 1.6;
+        }
+        nav {
+            background: #1a1a2e;
+            padding: 14px 24px;
+            display: flex;
+            gap: 24px;
+        }
+        nav a { color: #fff; text-decoration: none; font-weight: 500; }
+        nav a:hover { color: #e94560; }
+        main { max-width: 860px; margin: 32px auto; padding: 0 20px; }
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.06);
+        }
+        h1 { font-size: 2rem; margin-bottom: 6px; }
+        h2 { font-size: 1.4rem; margin-bottom: 16px; color: #1a1a2e; }
+        .muted { color: #666; }
+        ul { list-style: none; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+        img.profile-photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; }
+        img.project-img { width: 100%; border-radius: 8px; }
+        .bar { background: #eee; border-radius: 6px; height: 10px; margin-top: 4px; }
+        .bar > div { background: #e94560; height: 10px; border-radius: 6px; }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font: inherit;
+        }
+        button {
+            background: #e94560;
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font: inherit;
+            cursor: pointer;
+        }
+        button:hover { background: #c7364e; }
+        a.link { color: #e94560; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'resume:home' %}">Резюме</a>
+        <a href="{% url 'blog:post_list' %}">Блог</a>
+        <a href="{% url 'contact:contact' %}">Связаться</a>
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

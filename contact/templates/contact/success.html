@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Сообщение отправлено{% endblock %}
+
+{% block content %}
+    <div class="card" style="text-align:center;">
+        <h1>✅ Спасибо!</h1>
+        <p class="muted">Твоё сообщение отправлено. Я отвечу как можно скорее.</p>
+        <p style="margin-top:16px;"><a class="link" href="{% url 'resume:home' %}">← На главную</a></p>
+    </div>
+{% endblock %}
