@@ -28,6 +28,10 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'true').lower() == 'true'
 
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '*').split(',')
 
+CSRF_TRUSTED_ORIGINS = os.environ.get('DJANGO_CSRF_TRUSTED_ORIGINS', '').split(',')
+if not CSRF_TRUSTED_ORIGINS and ALLOWED_HOSTS != ['*']:
+    CSRF_TRUSTED_ORIGINS = [f'https://{h}' for h in ALLOWED_HOSTS if h and h != '*']
+
 
 # Application definition
 
