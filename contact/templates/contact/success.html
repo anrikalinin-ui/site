@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
+{% block logoname %}БЕ{% endblock %}
 {% block title %}Сообщение отправлено{% endblock %}
 
 {% block content %}
-    <div class="card" style="text-align:center;">
-        <h1>✅ Спасибо!</h1>
-        <p class="muted">Твоё сообщение отправлено. Я отвечу как можно скорее.</p>
-        <p style="margin-top:16px;"><a class="link" href="{% url 'resume:home' %}">← На главную</a></p>
-    </div>
+<div class="success-box wrap">
+    <h1>Спасибо!</h1>
+    <p style="color: var(--muted); font-size:18px;">Сообщение отправлено. Я отвечу как можно скорее.</p>
+    <p style="margin-top:24px;"><a class="btn btn-grad" href="{% url 'resume:home' %}">На главную</a></p>
+</div>
 {% endblock %}
