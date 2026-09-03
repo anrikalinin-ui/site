@@ -5,7 +5,7 @@ from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
-    help = 'Ensure a superuser exists with the password from DJANGO_SUPERUSER_PASSWORD'
+    help = 'Create or reset the superuser password from env vars'
 
     def handle(self, *args, **options):
         username = os.environ.get('DJANGO_SUPERUSER_USERNAME', 'admin')
@@ -20,11 +20,11 @@ class Command(BaseCommand):
             username=username,
             defaults={'email': email},
         )
+        user.set_password(password)
         user.is_staff = True
         user.is_superuser = True
-        user.is_active = True
-        user.set_password(password)
+        if email:
+            user.email = email
         user.save()
-
-        action = 'created' if created else 'password updated'
+        action = 'created' if created else 'password reset'
         self.stdout.write(f'Superuser {username} {action}')
