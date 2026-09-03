@@ -9,6 +9,10 @@ class Command(BaseCommand):
     help = 'Заполнить БД демо-данными резюме (Булдыгин Е.А.)'
 
     def handle(self, *args, **options):
+        if Profile.objects.exists():
+            self.stdout.write('База уже заполнена, пропускаю')
+            return
+
         p, _ = Profile.objects.update_or_create(
             pk=1,
             defaults=dict(
